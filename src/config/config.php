@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'url' => 'fancy-doll-store.myshopify.com',
+    'url' => 'somesite.myshopify.com',
     'apikey'=>'',
     'password'=>''
 );
