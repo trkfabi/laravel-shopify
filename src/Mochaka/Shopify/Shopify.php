@@ -2,9 +2,9 @@
 
     namespace Mochaka\Shopify;
 
-    use Guzzle\Http\Client;
-    use Guzzle\Http\Exception\ClientErrorResponseException;
-    use Guzzle\Http\Exception\BadResponseException;
+    use GuzzleHttp\Client;
+    use GuzzleHttp\Exception\ClientErrorResponseException;
+    use GuzzleHttp\Exception\BadResponseException;
 
     class Shopify
     {
@@ -26,14 +26,10 @@
         public function __construct($domain, $key, $password)
         {
             $url          = "https://" . $key . ":" . $password . "@" . $domain . "/admin/";
-            $this->client = new Client(
-                $url,
-                [
-                    'defaults' => [
-                        'headers' => ['Content-Type' => 'application/json'],
-                    ]
-                ]
-            );
+            $this->client = new Client([
+                'base_url' => $url,
+                'defaults' => ['headers' => ['Content-Type' => 'application/json']]
+            ]);
         }
 
         /**
@@ -48,22 +44,22 @@
         private function makeRequest($method, $page, $data = [])
         {
 
-            $r = $this->client->createRequest($method, $page, null, $data);
+            $r = $this->client->createRequest($method, $page, $data);
 
             if ($data && $method != 'GET') {
                 $r->setBody(json_encode($data), 'application/json');
             }
 
             if ($method == 'GET' && !empty($data)) {
-                $query = $r->getQuery();
+                /*$query = $r->getQuery();
                 foreach ($data as $key => $val) {
                     $query->set($key, $val);
-                }
+                }*/
             }
 
             try {
-                return $r->send()
-                         ->json();
+                $response = $this->client->send($r);
+                return $response->json();
             } catch (ClientErrorResponseException $e) {
                 return [
                     'error'    => $e->getMessage(),
