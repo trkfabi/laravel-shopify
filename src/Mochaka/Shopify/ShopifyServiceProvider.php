@@ -2,7 +2,7 @@
 
 namespace Mochaka\Shopify;
 
-use Config;
+use \Config;
 use Illuminate\Support\ServiceProvider;
 
 class ShopifyServiceProvider extends ServiceProvider {
