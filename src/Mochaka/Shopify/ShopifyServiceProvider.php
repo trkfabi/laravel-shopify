@@ -21,7 +21,7 @@ class ShopifyServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('mochaka/laravel-shopify','Shopify');
+		$this->package('mochaka/laravel-shopify','shopify');
 	}
 
 	/**
