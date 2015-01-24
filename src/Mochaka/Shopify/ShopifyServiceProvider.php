@@ -2,7 +2,7 @@
 
 namespace Mochaka\Shopify;
 
-use \Config;
+use Config;
 use Illuminate\Support\ServiceProvider;
 
 class ShopifyServiceProvider extends ServiceProvider {
@@ -39,7 +39,13 @@ class ShopifyServiceProvider extends ServiceProvider {
 
         $this->app['shopify'] = $this->app->share(function($app)
         {
-            return new Shopify(Config::get('shopify::url'),Config::get('shopify::apikey'),Config::get('shopify::password'));
+            $url = Config::get('shopify::url');
+            $key = Config::get('shopify::apikey');
+            $pwd = Config::get('shopify::password');
+            \Log::info($url);
+            \Log::info($key);
+            \Log::info($pwd);
+            return new Shopify($url,$key,$pwd);
         });
 	}
 
