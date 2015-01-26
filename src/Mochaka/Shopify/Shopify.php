@@ -46,7 +46,7 @@
             
             $url = "https://" . $this->key . ":" . $this->password . "@" . $this->domain . "/admin/";
             
-            $this->client['base_url'] = $url;
+            $this->client->base_url = $url;
         }
         
         /**
