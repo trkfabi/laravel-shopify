@@ -31,20 +31,20 @@ class ShopifyServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->booting(function()
-		{
-		  $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-		  $loader->alias('Shopify', 'Mochaka\Shopify\Facades\Shopify');
-		});
+            $this->app->booting(function()
+            {
+                $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+                $loader->alias('Shopify', 'Mochaka\Shopify\Facades\Shopify');
+            });
 
-        $this->app['shopify'] = $this->app->share(function($app)
-        {
-            $url = Config::get('shopify::url');
-            $key = Config::get('shopify::apikey');
-            $pwd = Config::get('shopify::password');
- 
-            return new Shopify($url,$key,$pwd);
-        });
+            $this->app['shopify'] = $this->app->share(function($app)
+            {
+                $url = Config::get('shopify::url');
+                $key = Config::get('shopify::apikey');
+                $pwd = Config::get('shopify::password');
+
+                return new Shopify($url,$key,$pwd);
+            });
 	}
 
 	/**
