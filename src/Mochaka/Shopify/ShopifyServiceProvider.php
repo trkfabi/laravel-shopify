@@ -34,14 +34,14 @@ class ShopifyServiceProvider extends ServiceProvider {
 
             $this->app['shopify'] = $this->app->share(function($app)
             {
-                $url = Config::get('shopify::url');
-                $key = Config::get('shopify::apikey');
-                $pwd = Config::get('shopify::password');
+                //$url = Config::get('shopify::url');
+                //$key = Config::get('shopify::apikey');
+                //$pwd = Config::get('shopify::password');
                 
-                \Log::info($app['config']->get('shopify::url'));
+                //\Log::info($app['config']->get('shopify::url'));
                 
-                return new Shopify($url,$key,$pwd);
-
+               // return new Shopify($url,$key,$pwd);
+                return new Shopify();
                
             });
 	}

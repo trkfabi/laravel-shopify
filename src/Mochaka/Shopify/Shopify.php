@@ -16,6 +16,9 @@
          */
         protected $client;
 
+        protected $key, $domain, $password;
+
+
         /**
          * __construct to init the guzzle client
          *
@@ -23,15 +26,29 @@
          * @param string $key
          * @param string $password
          */
-        public function __construct($domain, $key, $password)
+        public function __construct()
         {
+            /*
             $url          = "https://" . $key . ":" . $password . "@" . $domain . "/admin/";
             $this->client = new Client([
                 'base_url' => $url,
                 'defaults' => ['headers' => ['Content-Type' => 'application/json']]
             ]);
+             * 
+             */
+            $this->client = new Client(['defaults' => ['headers' => ['Content-Type' => 'application/json']]]);            
         }
 
+        public function setStore($domain, $key, $password){
+            $this->domain = $domain;
+            $this->key = $key;
+            $this->password = $password;
+            
+            $url = "https://" . $this->key . ":" . $this->password . "@" . $this->domain . "/admin/";
+            
+            $this->client['base_url'] = $url;
+        }
+        
         /**
          * send off the request to Shopify, encoding the data as JSON
          *
