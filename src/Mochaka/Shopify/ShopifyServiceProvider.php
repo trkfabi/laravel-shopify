@@ -38,7 +38,7 @@ class ShopifyServiceProvider extends ServiceProvider {
                 $key = Config::get('shopify::apikey');
                 $pwd = Config::get('shopify::password');
                 
-                \Log::info($app);
+                \Log::info($app['config']);
                 
                 return new Shopify($url,$key,$pwd);
 
