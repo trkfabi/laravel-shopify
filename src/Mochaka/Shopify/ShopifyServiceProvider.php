@@ -21,7 +21,7 @@ class ShopifyServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('mochaka/laravel-shopify','shopify');
+            $this->package('mochaka/laravel-shopify','shopify');
 	}
 
 	/**
@@ -31,14 +31,6 @@ class ShopifyServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-            /*
-            $this->app->booting(function()
-            {
-                $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-                $loader->alias('Shopify', 'Mochaka\Shopify\Facades\Shopify');
-            });
-         
-            */
 
             $this->app['shopify'] = $this->app->share(function($app)
             {
@@ -46,9 +38,11 @@ class ShopifyServiceProvider extends ServiceProvider {
                 $key = Config::get('shopify::apikey');
                 $pwd = Config::get('shopify::password');
                 
-                \Log::info($url . '   ' . $key . '   ' . $pwd);
- 
+                \Log::info($app);
+                
                 return new Shopify($url,$key,$pwd);
+
+               
             });
 	}
 
